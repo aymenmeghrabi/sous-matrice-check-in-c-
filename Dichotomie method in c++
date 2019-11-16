@@ -1,0 +1,59 @@
+#include<iostream>
+#include<stdbool.h>
+
+using namespace std;
+bool DichoSearch(int* s, int x,int l) {
+	int begin; int end; int mil;
+	if (x<s[0] || x>s[l-1]) {
+		return false;
+	}
+	else {
+		if (x == s[0] || x == s[l - 1]) { return true; }
+		else
+		{
+			begin = 0; end = l - 1;
+			while (end-begin>1)
+			{
+				mil = (begin + end)/2;
+				if (s[mil] == x) { return true; }
+				else {
+					if (s[mil] < x) {
+						begin = mil;
+					}
+					else
+					{
+						end = mil;
+			}
+				}
+
+
+			}
+			return false;
+
+		}
+	}
+}
+int main() {
+	int i, l,x;
+	int* p;
+	p = (int*)malloc(20 * sizeof(int));
+	cout << "Donner la taille du vecteur\n";
+	cin >> l;
+	for (size_t i = 0; i < l; i++)
+	{
+		cout << "\nDonner p["<<i<<"]\n";
+		cin >> p[i];
+
+
+	}
+	cout << "\nDonner un entier svp\n";
+	cin >> x;
+	if(DichoSearch(p,x,l)){
+		cout << "\n" << x << "is exist in vector";
+	}
+	else
+	{
+		cout << "\n" << x << "doesn't exist in vector";
+
+	}
+}
