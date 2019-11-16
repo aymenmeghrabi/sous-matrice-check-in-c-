@@ -1,0 +1,47 @@
+#include<iostream>
+#include<string>
+using namespace std;
+void debuttout(char *s) {
+	int i = 0; int j;
+	while (i < (strlen(s)))
+	{j = 0;
+	while (j <= i)
+	{
+		cout <<s[j];
+		j++;
+
+	}
+	cout << "\n";
+	i++;
+
+	}
+}
+void pluslongdeb(char* s1, char* s2,char*v) {
+	int i = 0; int l1 = strlen(s1);int l2 = strlen(s2);
+	v = (char*)malloc(20*sizeof(char));
+	while (i<l1 && i<l2 && s1[i]==s2[i])
+	{
+		v[i] = s1[i]; i++;
+	}
+	if (i == 0) { 
+		free(v);
+		v = NULL; }
+	
+}
+int main() {
+	char* s;
+	char* t; char* v=NULL;
+	t= (char*)malloc(40 * sizeof(char));
+	s = (char*)malloc(40*sizeof(char));
+	cout << "Donner 2 chaine de caractere\n";
+	cin >> s;
+	cin >> t;
+	pluslongdeb(s,t,v);
+	if(v!=NULL){
+		cout << v;
+	}
+	cout << "\n";
+	debuttout(s);
+
+	return 0;
+}
