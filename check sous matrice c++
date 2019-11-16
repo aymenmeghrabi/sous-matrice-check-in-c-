@@ -1,0 +1,95 @@
+#include<iostream>
+#include<stdbool.h>
+using namespace std;
+bool sousmat(int **A,int **B,int n,int m,int nb) {
+	int i=0, j, k1, k2, deb1, deb2;
+	bool check = false;
+	while (i <= n - nb) {
+		j = 0;
+		while (j<=m-nb)
+		{
+			deb1 = i; deb2 = j;
+			if (A[i][j] == B[0][0]) {
+				k1 = 0;
+				while ((k1 < nb) && (!check))
+				{
+					k2 = 0;
+					j = deb2;
+					while ((k2 < nb) && (!check))
+					{
+						if (A[i][j] == B[k1][k2]) {
+							j++;
+							k2++;
+						}
+						else { check = true; }
+					}
+					k1++; i++;
+
+				}
+				if ((k1 == nb) && (check == false)) {
+					cout << "le nombre du ligne est " << deb1 << "et le nombre du colonne est " << deb2<<"\n";
+					return true;
+
+				}
+				else
+				{
+					i = deb1; j = deb2 + 1;
+				}
+			}
+			else {
+				j++;
+			
+			}
+		}
+		i++;
+	}
+	return false;
+}
+
+
+
+
+int main() {
+	int n, m, k1, k2,i,j,nb;
+	bool check;
+	int **p;
+	int **b;
+	cout <<" Donner le nombre des ligne\n";
+	cin >> n;
+	p = (int**)malloc(n * sizeof(int*));
+	cout << "\nDonner le nombre des colonnes\n";
+	cin >> m;
+	for (i = 0; i < n; i++) {
+		p[i] = (int*)malloc(m * sizeof(int));
+	}
+	cout << "\nremplis le tableau";
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < m; j++) {
+			cout << "\n Donner p["<<i<<"]["<<j<<"]\n";
+			cin >> p[i][j];
+		}
+	}
+	cout << "\nDonner la taille du sous-matrice\n";
+	cin >> nb;
+	b = (int**)malloc(nb * sizeof(int*));
+	for (i = 0; i < nb; i++) {
+		b[i] = (int*)malloc(sizeof(int*));
+	}
+	cout << "\nRemplis le sous-matrice svp";
+	for (i = 0; i < nb; i++) {
+		for (j = 0; j < nb; j++) {
+			cout << "\nDonner b[" << i << "][" << j << "]\n";
+			cin >> b[i][j];
+		}
+	}
+
+	check = sousmat(p,b,n,m,nb);
+	if (check) {
+		cout << "b est sous matrice du p";
+	}
+	else
+	{
+		cout << "b is not sous matrice du p";
+	}
+
+}
